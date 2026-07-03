@@ -1,0 +1,15 @@
+{
+  "name": "github-skills",
+  "owner": {
+    "name": "Paldom",
+    "url": "https://github.com/Paldom"
+  },
+  "plugins": [
+    {
+      "name": "github-skills",
+      "source": ".",
+      "description": "Agent Skills for professional GitHub repos - brief, structured, SEO-friendly READMEs that convert visitors into users, plus complete OSS scaffolding: community health files, templates, and discoverability best practices.",
+      "category": "development"
+    }
+  ]
+}
