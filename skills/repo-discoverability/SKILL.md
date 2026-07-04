@@ -1,6 +1,7 @@
 ---
 name: repo-discoverability
 description: Optimizes how a GitHub repository gets found - repo description, topics, social preview image, name/H1 alignment, heading and link practices for GitHub and web search. Use when the user wants more stars, traffic, or search visibility, or asks to set topics, improve repo SEO, or make the project easier to find. Not for rewriting README prose or repo protections.
+license: MIT
 argument-hint: [owner/repo (defaults to current repo)]
 ---
 

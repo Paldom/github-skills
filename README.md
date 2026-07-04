@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/Paldom/github-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/Paldom/github-skills/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![skills.sh](https://skills.sh/b/Paldom/github-skills)](https://skills.sh/Paldom/github-skills)
 
 Agent Skills for professional GitHub repos - brief, structured, SEO-friendly READMEs that convert visitors into users, plus complete OSS scaffolding: community health files, templates, and discoverability best practices.
 

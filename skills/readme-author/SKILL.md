@@ -1,6 +1,7 @@
 ---
 name: readme-author
 description: Writes or restructures a professional GitHub project README - front-loaded value prop, minimal trust badges, copy-pasteable quick start, scannable structure for a library, CLI, or web app. Use when the user asks to write, improve, restructure, or review a README, or says theirs is bloated. Not for repo topics/social-preview metadata, community files, or profile READMEs.
+license: MIT
 argument-hint: [path-to-README or project description]
 ---
 

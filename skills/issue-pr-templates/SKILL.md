@@ -1,6 +1,7 @@
 ---
 name: issue-pr-templates
 description: Builds structured GitHub contribution intake - YAML issue forms with required fields and auto-labels, config.yml routing, a pull request template with a working checklist, and starter labels like good first issue. Use when the user asks for issue templates, bug report forms, a PR template, or to stop blank issues. Not for CONTRIBUTING or other prose community files, and not for issue triage.
+license: MIT
 argument-hint: [bug|feature|pr|labels|all]
 ---
 
