@@ -8,6 +8,9 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
 ## [Unreleased]
 
 ### Added
+- skills.sh distribution: `npx skills add Paldom/github-skills` quick start, repo-page
+  groupings (`skills.sh.json`), a `skills-sh` CI job mirroring the consumer
+  install, `docs/deploying.md`, and the bundled `publish-repo` skill.
 - `docs/setup-prompt.md` — paste-ready `/goal` prompt orchestrating all six
   skills against a target repo (audit → four parallel fix agents → protections
   → re-audit), linked from the README quick start.

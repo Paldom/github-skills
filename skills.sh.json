@@ -1,0 +1,21 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Get read, get found",
+      "description": "Turn a repo visit into a user: a README that convinces in ten seconds and metadata that search actually ranks.",
+      "skills": ["readme-author", "repo-discoverability"]
+    },
+    {
+      "title": "Welcome contributors",
+      "description": "Community health files and structured intake that turn drive-by visitors into confident, low-friction contributors.",
+      "skills": ["community-health", "issue-pr-templates"]
+    },
+    {
+      "title": "Protect and prove",
+      "description": "Server-side protections and an evidence-backed audit that show the repo is professionally run - and keep it that way.",
+      "skills": ["repo-protections", "repo-audit"]
+    }
+  ]
+}
