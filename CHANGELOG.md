@@ -8,6 +8,9 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
 ## [Unreleased]
 
 ### Added
+- `docs/setup-prompt.md` — paste-ready `/goal` prompt orchestrating all six
+  skills against a target repo (audit → four parallel fix agents → protections
+  → re-audit), linked from the README quick start.
 - `readme-author` — writes/restructures professional project READMEs (front-loaded
   structure, badge discipline, copy-pasteable quick start) with a deterministic
   `readme_lint.py` gate and per-type templates.

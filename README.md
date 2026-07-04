@@ -29,6 +29,11 @@ cp -r github-skills/skills/<skill-name> your-project/.claude/skills/
 Then just describe the task in Claude Code — the skill activates on its description —
 or invoke it explicitly with `/<skill-name>`.
 
+To professionalize a whole repository in one run, paste the
+[setup prompt](docs/setup-prompt.md): it orchestrates all six skills
+(audit → four parallel fix agents → protections → re-audit) with verifier
+gates and a single reviewed commit.
+
 ## Skills
 
 | Skill | Description |
