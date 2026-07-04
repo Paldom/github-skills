@@ -13,11 +13,20 @@ scripts/references — validated on every write, commit, and PR.
 
 ## Quick start
 
-Install with the [skills CLI](https://skills.sh) — works with Claude Code, Cursor,
-Codex, and any Agent Skills-compatible tool:
+Install with the [skills CLI](https://skills.sh) — auto-detects 70+ agents
+(Claude Code, Codex, Cursor, Copilot, pi, …):
 
 ```bash
-npx skills add Paldom/github-skills
+npx skills add Paldom/github-skills                  # all detected agents
+npx skills add Paldom/github-skills -a codex -a pi   # or target specific agents
+```
+
+Or with the [GitHub CLI](https://cli.github.com/manual/gh_skill_install) (≥ 2.90),
+including version-pinned installs from releases:
+
+```bash
+gh skill install Paldom/github-skills
+gh skill install Paldom/github-skills <skill> --pin v0.1.0
 ```
 
 Or as a Claude Code plugin:
