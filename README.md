@@ -33,7 +33,12 @@ or invoke it explicitly with `/<skill-name>`.
 
 | Skill | Description |
 | --- | --- |
-| _none yet_ | Skills are added via the workflow in [CONTRIBUTING.md](CONTRIBUTING.md). |
+| [readme-author](skills/readme-author/) | Writes or restructures a professional project README — front-loaded value prop, minimal badges, copy-pasteable quick start, per-type templates (library/CLI/web app). |
+| [repo-discoverability](skills/repo-discoverability/) | Optimizes how the repo gets found — description, topics, social preview, name/H1 alignment, GitHub + web search levers. |
+| [community-health](skills/community-health/) | Creates or completes community health files (CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, GOVERNANCE, FUNDING, CODEOWNERS, LICENSE) tailored to the repo. |
+| [issue-pr-templates](skills/issue-pr-templates/) | Builds structured intake — YAML issue forms with required fields, config.yml routing, PR template, starter labels. |
+| [repo-protections](skills/repo-protections/) | Configures server-side protections — rulesets, secret scanning & push protection, Dependabot, private vulnerability reporting, Actions hardening. |
+| [repo-audit](skills/repo-audit/) | Audits the repo against a professional-OSS checklist and returns a scored gap report routing each fix to the owning skill. |
 
 ## Repository structure
 

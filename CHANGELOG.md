@@ -8,4 +8,17 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
 ## [Unreleased]
 
 ### Added
+- `readme-author` — writes/restructures professional project READMEs (front-loaded
+  structure, badge discipline, copy-pasteable quick start) with a deterministic
+  `readme_lint.py` gate and per-type templates.
+- `repo-discoverability` — GitHub-native findability: description, topics, social
+  preview, name/H1 alignment; read-only `check_discoverability.py` audit.
+- `community-health` — CONTRIBUTING/CODE_OF_CONDUCT/SECURITY/SUPPORT/GOVERNANCE/
+  FUNDING/CODEOWNERS/LICENSE tailored to the repo; `check_health_files.py` gate.
+- `issue-pr-templates` — YAML issue forms + config.yml routing + PR template +
+  starter labels; schema validation via `validate_forms.sh`.
+- `repo-protections` — rulesets, secret scanning/push protection, Dependabot,
+  PVR, Actions hardening; read-only `check_protections.py` audit.
+- `repo-audit` — scored six-category gap report with owner-skill routing;
+  mechanical `collect_evidence.py` collector.
 - Repository scaffolded from the skills template.
