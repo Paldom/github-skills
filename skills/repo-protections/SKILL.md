@@ -24,7 +24,7 @@ does nothing until a ruleset requires code-owner review, and let bot PRs auto-me
 
 1. **Audit first** (read-only; degrades gracefully on 403/404):
    ```bash
-   python3 scripts/check_protections.py [owner/repo]
+   python3 "${CLAUDE_SKILL_DIR}/scripts/check_protections.py" [owner/repo]
    ```
    Reports: ruleset/protection on the default branch, secret scanning, push
    protection, Dependabot config, PVR — with pass/warn/fail per control.

@@ -56,7 +56,7 @@ exactly those failures.
    left unverified.
 6. **Lint.** Run and fix everything it reports:
    ```bash
-   python3 scripts/readme_lint.py README.md
+   python3 "${CLAUDE_SKILL_DIR}/scripts/readme_lint.py" README.md
    ```
 7. **Show the result** with a one-paragraph rationale of the ordering choices.
 

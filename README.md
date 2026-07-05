@@ -49,7 +49,7 @@ or invoke it explicitly with `/<skill-name>`.
 To professionalize a whole repository in one run, paste the
 [setup prompt](docs/setup-prompt.md): it orchestrates all six skills
 (audit → four parallel fix agents → protections → re-audit) with verifier
-gates and a single reviewed commit.
+gates; all changes stay uncommitted for your review.
 
 ## Skills
 

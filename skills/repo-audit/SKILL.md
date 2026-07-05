@@ -23,7 +23,7 @@ protections), and produce unprioritized nag-lists that ignore project stage.
 
 1. **Collect evidence mechanically** — no vibes:
    ```bash
-   python3 scripts/collect_evidence.py [owner/repo] > /tmp/repo-evidence.json
+   python3 "${CLAUDE_SKILL_DIR}/scripts/collect_evidence.py" [owner/repo] > /tmp/repo-evidence.json
    ```
    Gathers: repo metadata (`gh repo view --json`), community-profile health
    percentage, file presence (README/LICENSE/health files/templates/workflows),

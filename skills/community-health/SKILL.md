@@ -47,7 +47,7 @@ disclosure paths that 404, CODEOWNERS files that enforce nothing).
      MIT/Apache-2.0 default; note the CLA-vs-DCO table in the guide if asked.
 4. **Verify**:
    ```bash
-   python3 scripts/check_health_files.py [--remote owner/repo]
+   python3 "${CLAUDE_SKILL_DIR}/scripts/check_health_files.py" [--remote owner/repo]
    ```
    `--remote` also fetches GitHub's community-profile health percentage. Note the
    profile also counts issue/PR **templates** — if templates are the remaining gap,

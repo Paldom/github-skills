@@ -46,7 +46,7 @@ issue templates (no required fields), get the YAML forms schema subtly wrong
    honestly or it backfires.
 6. **Validate** (deterministic gate):
    ```bash
-   bash scripts/validate_forms.sh
+   bash "${CLAUDE_SKILL_DIR}/scripts/validate_forms.sh"
    ```
    It runs `check-jsonschema --builtin-schema vendor.github-issue-forms` against
    every form (pinned install if missing) and fails on schema violations.

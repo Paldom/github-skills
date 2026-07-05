@@ -24,7 +24,7 @@ works those levers, with `gh` commands for each.
 
 1. **Audit current state** (read-only):
    ```bash
-   python3 scripts/check_discoverability.py [owner/repo]
+   python3 "${CLAUDE_SKILL_DIR}/scripts/check_discoverability.py" [owner/repo]
    ```
    It reports description, topics, homepage, social preview, and H1 alignment
    status with pass/warn/fail per lever.
