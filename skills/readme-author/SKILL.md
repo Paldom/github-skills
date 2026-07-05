@@ -1,6 +1,6 @@
 ---
 name: readme-author
-description: Writes or restructures a professional GitHub project README - front-loaded value prop, minimal trust badges, copy-pasteable quick start, scannable structure for a library, CLI, or web app. Use when the user asks to write, improve, restructure, or review a README, or says theirs is bloated. Not for repo topics/social-preview metadata, community files, or profile READMEs.
+description: Writes, restructures, or syncs a professional GitHub project README - front-loaded value prop, minimal badges, copy-pasteable quick start, scannable structure for a library, CLI, or web app. Use when the user asks to write, improve, restructure, or review a README, or calls it bloated, stale, or outdated. Not for repo topics/social-preview metadata, community files, or profile READMEs.
 license: MIT
 argument-hint: [path-to-README or project description]
 ---
@@ -38,14 +38,27 @@ exactly those failures.
      ~500–1500 (library); depth goes to `docs/` links, not inline.
    - Badges: CI, license (static shields badge), version/coverage only if real.
      Verify the workflow file exists before adding its badge.
+   - Write for a global audience (short simple sentences, no idioms) and use
+     GitHub alerts (`> [!IMPORTANT]` …) sparingly for lines that must not be
+     skimmed past — rules in the playbook.
 4. **Restructuring an existing README?** Move content, don't delete it: deep
    sections become `docs/*.md` files with links from the README. Never invent new
    claims while restructuring. Add a TOC only if the result still exceeds ~400 lines.
-5. **Lint.** Run and fix everything it reports:
+5. **Syncing after code changes (drift)?** Don't rewrite — diff first, then apply
+   the drift map in `references/readme-playbook.md` (dependency → Installation,
+   env var → Configuration, endpoint/command → Usage, feature → Features;
+   removed → prune, deprecated → mark with the replacement). The map names the
+   primary sections — after applying it, search the whole README for the old
+   identifiers and prune every hit. Preserve the README's existing tone and
+   structure. Verify commands **safely**: static checks (files/flags/scripts
+   referenced actually exist) and non-destructive local dry-runs only — never
+   execute anything mutating, networked, or secret-requiring; list what was
+   left unverified.
+6. **Lint.** Run and fix everything it reports:
    ```bash
    python3 scripts/readme_lint.py README.md
    ```
-6. **Show the result** with a one-paragraph rationale of the ordering choices.
+7. **Show the result** with a one-paragraph rationale of the ordering choices.
 
 ## Output spec
 

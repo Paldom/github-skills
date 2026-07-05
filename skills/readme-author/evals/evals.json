@@ -11,6 +11,8 @@
     { "type": "should_trigger", "prompt": "add a quick start section to the readme" },
     { "type": "should_trigger", "prompt": "new OSS project, I need a landing-page quality readme" },
     { "type": "should_trigger", "prompt": "readme.md for a python library pls" },
+    { "type": "should_trigger", "prompt": "the readme is out of date after the refactor, sync it with the code" },
+    { "type": "should_trigger", "prompt": "our README still documents the old CLI flags, bring it up to date" },
     { "type": "should_not_trigger", "prompt": "add topics to my repo so people can find it" },
     { "type": "should_not_trigger", "prompt": "set a social preview image for the repo" },
     { "type": "should_not_trigger", "prompt": "write CONTRIBUTING.md for this project" },
@@ -48,6 +50,17 @@
         "derives a plausible one-line value proposition from the idea and marks unknown details as clearly-labelled placeholders",
         "does not add badges pointing at CI or registries that do not exist yet",
         "keeps the skeleton short and flags which sections to fill in after code exists"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "we renamed the env vars and added a new subcommand last sprint - update the README",
+      "expected_behavior": [
+        "diffs the recent changes first and starts from the mapped sections (Configuration for env vars, Usage for the subcommand), then searches the whole README for the old identifiers",
+        "preserves the README's existing tone, structure, and formatting - a sync, not a rewrite",
+        "prunes old env var names everywhere; if something is deprecated-but-working it is marked with its replacement instead of deleted",
+        "verifies commands safely (existence/static checks, dry-runs only - nothing mutating or networked) and lists anything left unverified",
+        "re-runs the lint script after the sync"
       ]
     },
     {

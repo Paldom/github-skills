@@ -1,7 +1,7 @@
 {
   "name": "github-skills",
   "description": "Agent Skills for professional GitHub repos - brief, structured, SEO-friendly READMEs that convert visitors into users, plus complete OSS scaffolding: community health files, templates, and discoverability best practices.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Paldom",
     "url": "https://github.com/Paldom"

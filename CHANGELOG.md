@@ -7,6 +7,12 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
 
 ## [Unreleased]
 
+### Changed
+- `readme-author` learned drift-sync: a code-change → README-section map
+  (dependencies → Installation, env vars → Configuration, commands/endpoints →
+  Usage, removals → prune), plus global-audience readability rules and
+  GitHub alert callouts — distilled from an ecosystem survey of README skills.
+
 ### Added
 - skills.sh distribution: `npx skills add Paldom/github-skills` quick start, repo-page
   groupings (`skills.sh.json`), a `skills-sh` CI job mirroring the consumer

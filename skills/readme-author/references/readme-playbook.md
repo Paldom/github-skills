@@ -15,6 +15,7 @@ covered by sibling references — do not handle them here.
 - [Length and navigation](#length-and-navigation)
 - [Tone rules](#tone-rules)
 - [Emphasis by project type](#emphasis-by-project-type)
+- [Keep it true: the drift map](#keep-it-true-the-drift-map)
 - [Anti-patterns](#anti-patterns)
 - [Skeleton template](#skeleton-template)
 - [Pre-publish checklist](#pre-publish-checklist)
@@ -197,6 +198,20 @@ This section decides whether people actually try the project.
   Schema with custom error messages" beats "Easy validation".
 - **Write for a first-time visitor.** The curse of knowledge is the biggest
   README killer — spell out steps that feel obvious to you.
+- **Write for a global audience.** Most GitHub readers are not native English
+  speakers: short simple sentences (~9th-grade reading level), no idioms, no
+  culture-specific references, one idea per sentence.
+- **Use GitHub alerts for the few lines that must not be skimmed past** —
+  sparingly (more than ~3 per README stops working):
+  ```markdown
+  > [!IMPORTANT]
+  > Requires Node >= 22. Older versions fail at install time.
+
+  > [!WARNING]
+  > `--force` deletes untracked files.
+  ```
+  Available: `[!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]`, `[!CAUTION]` —
+  rendered as colored callouts on github.com.
 - Plain English, minimal jargon, honest scope. A short "known limitations" list
   reads as engineering maturity, not weakness.
 
@@ -210,6 +225,43 @@ Same skeleton, different weight:
 | **CLI tool** | Terminal GIF/capture, install per platform (default first), `--help` output, a commands table, exit codes, config file/env vars | Web-style screenshots, long conceptual intros |
 | **Web app** | Live demo link, hero screenshot, local setup with prerequisites + `.env.example`, run command with localhost URL, tech-stack list, deployment notes | Deep API reference inline (link out instead) |
 | **Data science / research** | What question it answers, data requirements and provenance, environment/reproducibility setup (lockfile, seed), how to reproduce results, one result figure | Marketing framing; reproducibility *is* the pitch |
+
+## Keep it true: the drift map
+
+A README that lies is worse than a README that's thin — stale install steps and
+phantom features are the fastest way to lose a reader's trust. When code changed
+and the README didn't, sync it with this mapping instead of rewriting from
+scratch:
+
+| Code change | README section to update |
+|---|---|
+| New/changed dependency or supported runtime | Installation (+ prerequisites, engines) |
+| New/renamed env var or config option | Configuration (and `.env.example` mention) |
+| New/changed CLI command, API endpoint, or public function | Usage / Quick start / API overview |
+| New user-facing feature | Features (benefit-phrased bullet) |
+| Removed capability | Prune it everywhere — pruning beats appending |
+| Deprecated (still works) capability | Mark it: replacement, planned removal version, one-line migration note |
+| Changed defaults or breaking behavior | Quick start + a `[!IMPORTANT]` alert if it bites on upgrade |
+| New badge-worthy signal (CI, coverage, release) | Badge row — and remove badges that died |
+
+Sync rules:
+
+- **Diff first**: read the actual change (git log/diff), start from the sections
+  the map names — preserve the README's existing tone, structure, and
+  formatting; a sync is not a rewrite.
+- **The map is the starting point, not the boundary**: after the mapped
+  sections, search the whole README (and its snippets, Docker examples, badges)
+  for the old identifiers — renamed flags and env vars hide outside their home
+  section.
+- **Verify commands safely**: statically check that every referenced file,
+  script, subcommand, and flag still exists; run only non-destructive local
+  commands or `--dry-run`/`--help` forms. Never execute mutating, networked, or
+  secret-requiring commands during a sync — list anything left unverified in
+  your summary. Stale commands are drift even if no diff touched them.
+- **Prune before you append.** Readers pay for every line; removed features and
+  dead options go the same day. Deprecated-but-working features stay, marked
+  with their replacement and removal timeline.
+- Re-run the lint script after a sync — drift fixes often break relative links.
 
 ## Anti-patterns
 
