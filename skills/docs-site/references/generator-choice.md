@@ -7,7 +7,8 @@ mid-2026 and drift — verify current status before pinning anything.
 **Contents:** [Decision table](#decision-table) ·
 [The MkDocs-Material caveat](#the-mkdocs-material-caveat) ·
 [Versioned docs](#versioned-docs) · [Generated API reference](#generated-api-reference) ·
-[Mixed-language projects](#mixed-language-projects) · [Search](#search)
+[Mixed-language projects](#mixed-language-projects) · [Search](#search) ·
+[The landing page](#the-landing-page)
 
 ## Decision table
 
@@ -94,3 +95,36 @@ good ones; Starlight ships Pagefind (scales well). For large OSS sites,
 Algolia DocSearch is free for qualifying projects and is the ecosystem
 standard (first-class in Docusaurus). Wire search before versioning — a
 searchable single-version site beats a versioned unsearchable one.
+
+## The landing page
+
+Distilled from the top live github.io docs sites (mdBook, Material for
+MkDocs, Just the Docs, GoogleTest, LSP, Monaco, leaflet for R,
+Sphinx-Gallery, VitePress):
+
+- **Hero vs docs-first.** A marketing hero (tagline + ≤3 buttons + feature
+  cards) earns its place when visitors ask "should I use this?" — tools
+  competing in a crowded category. Projects whose visitors arrive already
+  convinced (de-facto standards, specs, arrive-with-intent utilities) do
+  better docs-first: title, one definitional sentence, grouped links.
+- **The metric is clicks-to-runnable**: ≤2 from landing to a copy-pasteable
+  command, and 0 is the ideal — put a one-line install or a live demo on the
+  landing page itself. A "Get started" button is the fallback, not the goal.
+- **Tagline**: one definitional sentence under the H1 — what it is + what
+  you make with it. The H1 may state the benefit instead of the name
+  ("Focus on writing good documentation").
+- **Header kit**: search with a visible hotkey hint (`/` or `Ctrl/⌘-K`), a
+  GitHub link (always the secondary CTA, never the primary), dark-mode
+  toggle; a version switcher once more than one major is supported. Small
+  shallow sites can skip search — a one-screen grouped index beats a search
+  box.
+- **Content-page furniture**: copy buttons on code blocks, edit-this-page
+  links, prev/next pagination, per-page TOC. Split quickstarts by the
+  user's toolchain (pip/docker tabs, Bazel vs CMake) rather than one
+  generic path.
+- **Prerender the landing page.** A client-rendered SPA shell is invisible
+  to crawlers, link previews, and AI agents — every generator in the
+  decision table emits static HTML; keep it that way.
+- **Leaving github.io later?** Ship a redirect stub — a 404 with no pointer
+  strands every inbound link, and the strongest projects have made exactly
+  that mistake.

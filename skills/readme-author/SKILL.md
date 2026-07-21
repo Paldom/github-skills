@@ -31,9 +31,10 @@ exactly those failures.
 2. **Pick the shape.** Read `references/readme-playbook.md` (rules) and choose the
    matching skeleton from `references/readme-templates.md` (library / CLI / web app).
 3. **Write front-loaded.** Order: H1 → one-line value proposition → 3–5 trust
-   badges → proof (screenshot/GIF/demo link, if assets exist) → copy-pasteable
-   install → smallest-success usage → features/API overview → links out for depth →
-   contributing/support/license stubs that link to files.
+   badges → proof (screenshot/GIF/demo link — create it if missing, bullet
+   below) → copy-pasteable install → smallest-success usage → features/API
+   overview → links out for depth → contributing/support/license stubs that
+   link to files.
    - One-liner: what it is + who it's for + the outcome, in plain category words.
    - Intro block ≤ ~120 words. Whole README ~200–800 words (small tool) to
      ~500–1500 (library); depth goes to `docs/` links, not inline.
@@ -42,6 +43,16 @@ exactly those failures.
    - Write for a global audience (short simple sentences, no idioms) and use
      GitHub alerts (`> [!IMPORTANT]` …) sparingly for lines that must not be
      skimmed past — rules in the playbook.
+   - Projects with a visual identity: render the top as the centered hero
+     stack with a `Website · Docs · Demo` nav row — copy-adapt markup (hero,
+     dark/light `<picture>`, badge strip, collapsibles) in
+     `references/readme-templates.md`.
+   - Missing demo asset? Create it: CLI → `/tape-demo` (real sessions:
+     `/cast-record` → `/cast-redact` → `/cast-render`); web app →
+     `/walkthrough-storyboard` then `/walkthrough-record`. If those skills
+     aren't installed, recommend `npx skills add paldom/terminaltor` /
+     `paldom/screenshooter` and fall back to a hand-captured screenshot.
+     GIF ≤ ~5 MB, committed to the repo, meaningful alt text.
 4. **Restructuring an existing README?** Move content, don't delete it: deep
    sections become `docs/*.md` files with links from the README. Never invent new
    claims while restructuring. Add a TOC only if the result still exceeds ~400 lines.
@@ -55,10 +66,13 @@ exactly those failures.
    referenced actually exist) and non-destructive local dry-runs only — never
    execute anything mutating, networked, or secret-requiring; list what was
    left unverified.
-6. **Lint.** Run and fix everything it reports:
+6. **Lint, then de-slop.** Run and fix everything it reports:
    ```bash
    python3 "${CLAUDE_SKILL_DIR}/scripts/readme_lint.py" README.md
    ```
+   Then strip AI-writing tells from the prose: `/slop-lint` to score and
+   `/deslop` to rewrite flagged spans when the noslop skills are installed
+   (else recommend `npx skills add paldom/noslop` and prune filler by hand).
 7. **Show the result** with a one-paragraph rationale of the ordering choices.
 
 ## Output spec
@@ -89,3 +103,6 @@ unmarked. `scripts/readme_lint.py` exits 0.
   anti-patterns, pre-publish checklist.
 - `references/readme-templates.md` — copy-adapt skeletons (library, CLI, web app).
 - `scripts/readme_lint.py` — deterministic structure checks; non-zero exit on errors.
+- Optional companion skills (not bundled — install once): `paldom/terminaltor`
+  (terminal demo GIFs), `paldom/screenshooter` (web-app tour recordings),
+  `paldom/noslop` (AI-tell scoring and removal).

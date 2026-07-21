@@ -17,6 +17,7 @@ covered by sibling references — do not handle them here.
 - [Emphasis by project type](#emphasis-by-project-type)
 - [Keep it true: the drift map](#keep-it-true-the-drift-map)
 - [Anti-patterns](#anti-patterns)
+- [Study the exemplars](#study-the-exemplars)
 - [Skeleton template](#skeleton-template)
 - [Pre-publish checklist](#pre-publish-checklist)
 
@@ -36,6 +37,13 @@ first, the full feature list after. Everything else can scroll.
 
 Test it: read only the repo name, tagline, and first paragraph. If a stranger
 cannot answer "what / for whom / what outcome / what next", rewrite the top.
+
+The rule the best READMEs all obey: **the first screenful is a landing page
+(identity, credibility, proof, action); everything after the fold is a category
+decision.** Link depth out when a docs site exists (top projects cover whole
+platforms in ~120 lines this way); inline reference only when the README *is*
+the docs (small libraries) — then organize the depth with collapsibles and
+navigation instead of cutting it.
 
 ## Canonical section order
 
@@ -60,6 +68,14 @@ Rules for the order:
   the one-liner. It signals product judgment; keep it under 4 lines.
 - If the project's status is beta, experimental, or unmaintained, say so
   explicitly in a Status line — surprising a contributor later erodes trust.
+- **Conviction before instructions.** Top READMEs open with positioning and
+  proof; install appears only after the reader wants the thing. When several
+  paths exist, flag one "(Recommended)" and demote the rest.
+- Polished projects render the identity block as a centered **hero stack**
+  (logo → tagline → nav-link row → badges → visual) using GitHub's sanitized
+  HTML subset — copy-adapt markup in `readme-templates.md`. A nav row
+  (`Website · Docs · Demo`) under the tagline is more common in top READMEs
+  than a TOC.
 
 ## The one-liner
 
@@ -105,6 +121,14 @@ Rules:
   visitor counters. A badge wall reads as amateur, not thorough.
 - A broken or perpetually-red badge is worse than no badge — check them at
   release time.
+- **Style badges as one designed element**: one shields style (`flat-square`
+  or flat) and one color family across every badge; a uniform `labelColor`
+  makes even a longer strip read as brand, not clutter (markup in
+  `readme-templates.md`). Group larger sets into semantic rows: product
+  links / build health / community.
+- End-user apps may swap CI badges for **social proof** (contributors, docker
+  pulls, commit activity); concept-heavy libraries may drop badges entirely.
+  No badge row beats a default gray pile.
 
 ## Demo: screenshot, GIF, or live link
 
@@ -126,6 +150,24 @@ Installation (apps) or above Usage (CLIs/libraries).
   `docs/assets/`) and use relative paths so forks and clones still render.
 - Stale screenshots of a redesigned UI are worse than none — refresh them with
   releases.
+
+**Creating the demo** — a missing asset is a task, not an excuse:
+
+- Terminal demos as code: a VHS `.tape` script renders a reproducible,
+  re-renderable GIF. If the terminaltor skills are installed, `/tape-demo`
+  scripts and renders it (real sessions: `/cast-record` → `/cast-redact` →
+  `/cast-render`); otherwise recommend `npx skills add paldom/terminaltor`
+  or hand-write the tape.
+- Web-app tours: `/walkthrough-storyboard` plans and `/walkthrough-record`
+  renders a scripted GIF/mp4 when the screenshooter skills are installed;
+  otherwise recommend `npx skills add paldom/screenshooter` or capture one
+  clean screenshot manually.
+- Video: a bare video URL uploaded via a GitHub issue/PR (`user-attachments`)
+  embeds a real player in the README — the only way to ship video.
+- UI libraries: the strongest proof chain is code block → "the result looks
+  like this" screenshot → link to a live preview/sandbox.
+- Collapsed example galleries can keep previews visible: put the GIF inside
+  the `<details>` `<summary>` (markup in `readme-templates.md`).
 
 ## Installation and first-success usage
 
@@ -179,6 +221,12 @@ This section decides whether people actually try the project.
   needed to evaluate, install, and start; move architecture essays, full config
   references, and API depth to `docs/`, a wiki, or a docs site, and link with
   descriptive anchor text ("API reference", not "click here").
+- TOC reality from the best READMEs: most skip a list TOC even at 600+ lines.
+  Prefer, in order: clean headings (GitHub's auto-outline), an inline anchor
+  nav row in the hero, `<details>` per-use-case recipes (the reader sees ~15
+  lines, not 230), and a persona/OS router before multi-path sections ("If
+  you… are on macOS with Homebrew, see Option 2"). A list TOC earns its place
+  mainly in long linear tutorials.
 - Word counts are targets for usefulness, not quotas — never pad with filler.
 
 ## Tone rules
@@ -214,6 +262,10 @@ This section decides whether people actually try the project.
   rendered as colored callouts on github.com.
 - Plain English, minimal jargon, honest scope. A short "known limitations" list
   reads as engineering maturity, not weakness.
+- **De-slop pass after drafting.** If the noslop skills are installed, run
+  `/slop-lint` to score the draft and `/deslop` to rewrite flagged spans;
+  otherwise recommend `npx skills add paldom/noslop` and prune filler by hand
+  (see the AI-slop anti-pattern row).
 
 ## Emphasis by project type
 
@@ -225,6 +277,7 @@ Same skeleton, different weight:
 | **CLI tool** | Terminal GIF/capture, install per platform (default first), `--help` output, a commands table, exit codes, config file/env vars | Web-style screenshots, long conceptual intros |
 | **Web app** | Live demo link, hero screenshot, local setup with prerequisites + `.env.example`, run command with localhost URL, tech-stack list, deployment notes | Deep API reference inline (link out instead) |
 | **Data science / research** | What question it answers, data requirements and provenance, environment/reproducibility setup (lockfile, seed), how to reproduce results, one result figure | Marketing framing; reproducibility *is* the pitch |
+| **End-user app (desktop/mobile)** | Store/download badge buttons in the hero where Quick start would be — the hero's job is "get the app"; GIF demo; clone/run block as the secondary, developer path | Package-manager install prose as the primary path |
 
 ## Keep it true: the drift map
 
@@ -284,6 +337,22 @@ Note on ROI claims: widely-circulated numbers ("polished READMEs get N× more
 stars", "recruiters spend 7 seconds") are directional at best and unverified —
 never cite them in a README or use them to justify padding. The structural
 consensus (front-loading, quick start, visual proof) is what holds up.
+
+## Study the exemplars
+
+Before writing, skim 2–3 top READMEs in the project's category — steal
+patterns, never copy prose:
+
+- **CLI**: httpie (landing-page discipline, 113 lines), colorls
+  (screenshot-per-flag catalog)
+- **Library**: size-limit (per-use-case collapsibles), radioactive-state
+  (GIF-in-summary example gallery), gofiber/fiber (README-as-manual done well)
+- **Web/desktop app**: thelounge (full app in 95 lines), PostHog
+  (README-as-router), electron-markdownify (the canonical hero stack)
+- **Modern visual style**: lobehub/lobe-chat (design-system badge strip),
+  charmbracelet/vhs (per-feature GIFs, dark/light `<picture>` everywhere)
+- **Concept-heavy**: Day8/re-frame (prose as the demo — proof that audience
+  fit beats template compliance)
 
 ## Skeleton template
 

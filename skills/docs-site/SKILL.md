@@ -38,7 +38,10 @@ model. This skill encodes the current official pipeline and the fixes.
    `/<repo>/` — set the generator's `site_url`/`baseUrl`/`base` per the
    table in `references/pages-deploy.md`. Turn on strict builds
    (`mkdocs build --strict`, `sphinx-build -W`; Docusaurus throws on broken
-   links by default).
+   links by default). Shape the landing page per
+   `references/generator-choice.md`: hero when visitors are still choosing,
+   docs-first when they arrive convinced; ≤2 clicks (ideally 0) from landing
+   to a runnable command.
 4. **Pick ONE deploy model — never mix:**
    - Versioned MkDocs docs via `mike` → **branch publishing** (`gh-pages`),
      with `.nojekyll` and aliases (`mike deploy X latest --update-aliases`,
@@ -104,7 +107,7 @@ every manual settings step listed explicitly for the owner.
 
 - `references/generator-choice.md` — decision table, Material maintenance
   caveat, versioning mechanisms, generated API reference, mixed-language
-  strategy, search.
+  strategy, search, landing-page anatomy.
 - `references/pages-deploy.md` — verified Pages facts: publishing sources,
   canonical workflow, base paths, custom domains/DNS, limits, llms.txt
   status, troubleshooting table.

@@ -13,6 +13,7 @@
     { "type": "should_trigger", "prompt": "readme.md for a python library pls" },
     { "type": "should_trigger", "prompt": "the readme is out of date after the refactor, sync it with the code" },
     { "type": "should_trigger", "prompt": "our README still documents the old CLI flags, bring it up to date" },
+    { "type": "should_trigger", "prompt": "make my readme look as polished as the top github projects" },
     { "type": "should_not_trigger", "prompt": "add topics to my repo so people can find it" },
     { "type": "should_not_trigger", "prompt": "set a social preview image for the repo" },
     { "type": "should_not_trigger", "prompt": "write CONTRIBUTING.md for this project" },
@@ -70,6 +71,26 @@
         "adds at most ~5 meaningful trust badges (CI status, license, version/coverage where real)",
         "verifies the CI workflow file exists before adding its badge and uses the correct actions badge URL",
         "uses a static shields.io badge for the license and avoids decorative badge walls"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "our CLI has no demo, add a terminal gif to the readme",
+      "expected_behavior": [
+        "creates the demo rather than leaving a placeholder: uses the tape-demo skill when installed, otherwise writes a VHS .tape script or recommends installing paldom/terminaltor",
+        "keeps the GIF under ~5 MB, commits it to a repo path (not an external host), and gives it meaningful alt text",
+        "places the demo above Installation per the CLI template",
+        "shows real commands from this repo in the demo, never invented ones"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "the top of our readme looks amateur, give it a proper hero header",
+      "expected_behavior": [
+        "builds a centered hero stack (logo/tagline/nav row/badges) using the copy-adapt blocks from the templates reference, or a plain H1 route if the project has no logo",
+        "styles badges as one designed element (single shields style and color family), never a badge wall",
+        "nav-row links point only at sections or sites that actually exist",
+        "uses a dark/light picture element for the logo when a dark variant exists"
       ]
     }
   ]

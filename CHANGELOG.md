@@ -7,6 +7,20 @@ versioning: [SemVer](https://semver.org) on the plugin manifest
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-22
+
+### Changed
+- `readme-author` learned the exemplar layer, distilled from reading 20 of the
+  best READMEs on GitHub (awesome-readme canon): centered hero stacks and nav
+  rows, design-system badge strips, dark/light `<picture>` images,
+  per-use-case collapsibles, persona routers, per-category exemplar study
+  list — plus demo-GIF creation via the optional paldom/terminaltor and
+  paldom/screenshooter subskills and a de-slop pass via paldom/noslop.
+- `docs-site` learned docs-landing-page anatomy from 12 live github.io
+  exemplar sites: hero vs docs-first decision rule, clicks-to-runnable
+  metric, header kit, prerendered-landing rule, redirect-stub rule.
+- `docs-author` gained the optional paldom/noslop de-slop pass on docs prose.
+
 ## [0.3.0] - 2026-07-21
 
 ### Added

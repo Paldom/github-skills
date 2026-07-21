@@ -50,7 +50,8 @@ prevent exactly those failures.
    conditions before instructions, scannable structure, short sentences
    (~25-word check), no "simply/just/please", emphasis under ~10%.
    A sentence of inline explanation is fine; sustained explanation gets its
-   own page and a link.
+   own page and a link. After drafting, a `/slop-lint` + `/deslop` pass
+   (paldom/noslop, when installed) strips AI-writing tells from docs prose.
 5. **Make every example runnable.** Complete as pasted (imports, setup,
    expected output), verified against the actual source in this repo —
    never written from memory. Label anything partial. Apply the

@@ -11,6 +11,7 @@ never leave an empty stub heading in the final file.
 - [Template: library or package](#template-library-or-package)
 - [Template: CLI tool](#template-cli-tool)
 - [Template: web app](#template-web-app)
+- [Hero and polish blocks](#hero-and-polish-blocks-copy-adapt)
 - [Post-paste checklist](#post-paste-checklist)
 
 ## How to pick a template
@@ -320,6 +321,155 @@ See [ROADMAP.md](ROADMAP.md) or the [project board](<project-board-url>).
 
 Distributed under the <MIT> License. See [LICENSE](LICENSE).
 ````
+
+## Hero and polish blocks (copy-adapt)
+
+Markup patterns lifted from the best READMEs on GitHub (httpie, fiber,
+thelounge, electron-markdownify, lobe-chat, size-limit, radioactive-state,
+nerd-fonts, charmbracelet). All use GitHub's sanitized HTML subset — they
+render on github.com, in forks, and in clones. Use them to upgrade a
+template's top block; skip them for tiny utilities where a plain H1 reads
+cleaner.
+
+### The centered hero stack (the most-copied header on GitHub)
+
+```html
+<h1 align="center">
+  <br>
+  <a href="https://project-site"><img src="docs/assets/logo.png" alt="ProjectName" width="200"></a>
+  <br>
+  ProjectName
+  <br>
+</h1>
+
+<h4 align="center">One-line value proposition, with one <a href="https://key-tech">key link</a>.</h4>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> •
+  <a href="#features">Features</a> •
+  <a href="#documentation">Documentation</a> •
+  <a href="#license">License</a>
+</p>
+```
+
+Compact three-line variant (full app in a 95-line README):
+
+```html
+<h1 align="center"><img width="300" alt="ProjectName" src="docs/assets/logo.svg"></h1>
+<h3 align="center">One-line value proposition</h3>
+<p align="center"><strong>
+  <a href="https://example.com/">Website</a> •
+  <a href="https://example.com/docs">Docs</a> •
+  <a href="https://demo.example.com/">Demo</a>
+</strong></p>
+```
+
+### Dark/light adaptive images
+
+The only reliable dark-mode mechanism — use it for the logo and any chart
+whose colors break on one background:
+
+```html
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
+  <img height="125" alt="ProjectName" src="docs/assets/logo.svg">
+</picture>
+```
+
+### Design-system badge strip
+
+One shields style + one `labelColor` across every badge makes the row read as
+brand. Keep the URL definitions in a link group at the file bottom:
+
+```markdown
+<p align="center">
+
+[![][release-shield]][release-link] [![][ci-shield]][ci-link] [![][license-shield]][license-link]
+
+</p>
+
+<!-- LINK GROUP — keep at file bottom -->
+[release-shield]: https://img.shields.io/github/v/release/OWNER/REPO?labelColor=black&style=flat-square&logo=github
+[release-link]: ../../releases
+[ci-shield]: https://img.shields.io/github/actions/workflow/status/OWNER/REPO/ci.yml?labelColor=black&style=flat-square
+[ci-link]: ../../actions/workflows/ci.yml
+[license-shield]: https://img.shields.io/badge/license-MIT-white?labelColor=black&style=flat-square
+[license-link]: LICENSE
+```
+
+### Right-floated logo (zero-ceremony alternative)
+
+```html
+# ProjectName
+
+<img src="docs/assets/logo.svg" align="right" alt="ProjectName logo" width="120">
+
+ProjectName is a … (the intro paragraph wraps around the logo)
+```
+
+### Per-use-case collapsible recipes
+
+The reader picks their scenario and sees ~15 lines instead of 200. The blank
+line after `</summary>` is required for markdown to render inside:
+
+```html
+<details><summary><b>Using with Webpack</b></summary>
+
+1. Install the plugin: `npm i -D tool-webpack`
+2. Add it to `webpack.config.js`: …
+
+</details>
+```
+
+### GIF-inside-summary example gallery
+
+Collapsed examples that still show a moving preview:
+
+```html
+<details>
+<summary><strong>Counter app</strong>
+<p align="center"><img align="center" src="docs/assets/counter.gif" width="450" alt="Counter demo"></p>
+</summary>
+
+[Live demo](https://codesandbox.io/s/xxxx)
+
+```jsx
+const increment = () => state.count++;
+```
+
+</details>
+```
+
+### Persona router before multi-path sections
+
+Route by the reader's situation before showing any path in full:
+
+```markdown
+_If you…_
+
+- want the **quickest install**, run the one-liner below
+- are on **macOS** with **Homebrew**, see [Homebrew](#homebrew)
+- deploy with **Docker**, see [Docker](#docker)
+```
+
+### One-click deploy button (web apps)
+
+```markdown
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOWNER%2FREPO&env=REQUIRED_KEY)
+```
+
+### Back-to-top links (long READMEs only)
+
+```html
+<a id="readme-top"></a>          <!-- first line of the README -->
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>   <!-- after long sections -->
+```
+
+Rules of use: pick the hero variant that matches the project's visual identity
+(no logo → plain H1 or the emoji/text-only route); keep ONE style per README —
+mixing centered-hero and floated-logo reads as patchwork; every nav-row link
+must point at a section or site that exists.
 
 ## Post-paste checklist
 
