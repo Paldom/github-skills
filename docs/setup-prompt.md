@@ -1,6 +1,6 @@
 # Setup prompt — professional GitHub setup in one run
 
-One paste-ready `/goal` prompt orchestrating all six skills: audit → four parallel fix agents → protections → re-audit. `repo-audit` is read-only so it brackets the run; `repo-protections` goes last (its ruleset needs `community-health`'s CODEOWNERS and real CI check names); the middle four write disjoint files, so they parallelize.
+One paste-ready `/goal` prompt orchestrating the six core skills: audit → four parallel fix agents → protections → re-audit. `repo-audit` is read-only so it brackets the run; `repo-protections` goes last (its ruleset needs `community-health`'s CODEOWNERS and real CI check names); the middle four write disjoint files, so they parallelize.
 
 ## Prerequisites
 

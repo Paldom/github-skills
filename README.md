@@ -47,7 +47,7 @@ Then just describe the task in Claude Code — the skill activates on its descri
 or invoke it explicitly with `/<skill-name>`.
 
 To professionalize a whole repository in one run, paste the
-[setup prompt](docs/setup-prompt.md): it orchestrates all six skills
+[setup prompt](docs/setup-prompt.md): it orchestrates the six core skills
 (audit → four parallel fix agents → protections → re-audit) with verifier
 gates; all changes stay uncommitted for your review.
 
@@ -56,6 +56,8 @@ gates; all changes stay uncommitted for your review.
 | Skill | Description |
 | --- | --- |
 | [readme-author](skills/readme-author/) | Writes or restructures a professional project README — front-loaded value prop, minimal badges, copy-pasteable quick start, per-type templates (library/CLI/web app). |
+| [docs-author](skills/docs-author/) | Plans, writes, or restructures documentation content — Diátaxis-shaped structure (tutorials, how-to guides, reference, explanation), runnable verified examples, README-to-docs graduation, drift prevention. |
+| [docs-site](skills/docs-site/) | Stands up or fixes a GitHub Pages docs site — generator choice by ecosystem, the official Actions deploy workflow, base-path/.nojekyll/custom-domain pitfalls, docs CI, versioning. |
 | [repo-discoverability](skills/repo-discoverability/) | Optimizes how the repo gets found — description, topics, social preview, name/H1 alignment, GitHub + web search levers. |
 | [community-health](skills/community-health/) | Creates or completes community health files (CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, GOVERNANCE, FUNDING, CODEOWNERS, LICENSE) tailored to the repo. |
 | [issue-pr-templates](skills/issue-pr-templates/) | Builds structured intake — YAML issue forms with required fields, config.yml routing, PR template, starter labels. |

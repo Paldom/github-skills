@@ -1,0 +1,76 @@
+{
+  "skill": "docs-site",
+  "cases": [
+    { "type": "should_trigger", "prompt": "publish our docs to github pages" },
+    { "type": "should_trigger", "prompt": "set up a github.io site for this repo" },
+    { "type": "should_trigger", "prompt": "deploy mkdocs to gh pages with actions" },
+    { "type": "should_trigger", "prompt": "docs site deployed but all the css and links 404, fix it" },
+    { "type": "should_trigger", "prompt": "which static site generator should we use for our library docs?" },
+    { "type": "should_trigger", "prompt": "add versioned docs so v1 and v2 users see the right pages" },
+    { "type": "should_trigger", "prompt": "pages deploy fails with a permissions error in the workflow" },
+    { "type": "should_trigger", "prompt": "point docs.example.com at our github pages site" },
+    { "type": "should_trigger", "prompt": "make the docs build and deploy automatically when we merge to main" },
+    { "type": "should_trigger", "prompt": "css broken on github io but works locally" },
+    { "type": "should_trigger", "prompt": "add a docs check to CI so broken links fail the PR" },
+    { "type": "should_trigger", "prompt": "wire up mkdocstrings so the api reference builds from docstrings" },
+    { "type": "should_not_trigger", "prompt": "write a getting started tutorial for the sdk" },
+    { "type": "should_not_trigger", "prompt": "restructure our documentation into tutorials and how-to guides" },
+    { "type": "should_not_trigger", "prompt": "the docs prose is passive and wordy, improve the writing" },
+    { "type": "should_not_trigger", "prompt": "write a README with install instructions" },
+    { "type": "should_not_trigger", "prompt": "add issue templates and a PR template" },
+    { "type": "should_not_trigger", "prompt": "enable secret scanning and protect the main branch" },
+    { "type": "should_not_trigger", "prompt": "publish this package to PyPI" },
+    { "type": "should_not_trigger", "prompt": "deploy my nextjs app to vercel" },
+    { "type": "should_not_trigger", "prompt": "add repo topics so we rank better in github search" },
+    {
+      "type": "quality",
+      "prompt": "Set up a docs site for this Python package on GitHub Pages",
+      "expected_behavior": [
+        "inspects the repo (language, existing docs/, package layout) and picks a generator with a stated reason instead of defaulting blindly",
+        "creates a working config with site_url/base path correct for a project page served at /repo-name/",
+        "writes the official three-action Pages workflow (configure-pages, upload-pages-artifact, deploy-pages) with the exact required permissions and environment, building with strict mode",
+        "tells the user the one manual step: set Pages source to GitHub Actions in repo settings",
+        "does not hand-push a gh-pages branch when the Actions model is available"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Our docs deployed to github pages but the site has no styling and every internal link 404s",
+      "expected_behavior": [
+        "diagnoses the base-path/subpath mismatch (project site served under /repo-name/) as the primary suspect and checks the generator's site_url/baseUrl/base setting",
+        "checks for a missing .nojekyll when underscore-prefixed asset directories are involved",
+        "fixes the configuration root cause rather than rewriting individual links",
+        "verifies with a strict local build before redeploying"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Add docs CI so pull requests fail on broken links or a broken build",
+      "expected_behavior": [
+        "adds a PR workflow that runs the generator's strict build plus a link checker, path-filtered to docs changes",
+        "keeps deployment out of PRs - deploy runs only from the default branch",
+        "pins or versions the tools it introduces instead of pulling latest silently"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "We need the docs site to serve v1 and v2 separately with a version picker",
+      "expected_behavior": [
+        "first asks or checks whether the versions genuinely differ enough to justify versioning overhead, and says so",
+        "picks the mechanism matching the generator (mike for MkDocs, built-in versioning for Docusaurus) rather than inventing one",
+        "sets up latest/stable aliases and explains what happens on each release",
+        "warns that versioning multiplies maintenance and suggests archiving unsupported versions"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Serve the docs at docs.example.com instead of the github.io URL",
+      "expected_behavior": [
+        "gives the exact DNS records needed (CNAME for a subdomain pointing at the pages domain) and where to set the custom domain in repo settings",
+        "explains certificate provisioning delay and to enable enforce-HTTPS only after the cert is issued",
+        "ensures the CNAME survives automated rebuilds (kept in the built output or set via settings) so the domain is not lost on the next deploy",
+        "mentions domain verification to prevent takeover"
+      ]
+    }
+  ]
+}

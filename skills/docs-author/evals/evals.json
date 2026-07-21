@@ -1,0 +1,66 @@
+{
+  "skill": "docs-author",
+  "cases": [
+    { "type": "should_trigger", "prompt": "write documentation for my python package" },
+    { "type": "should_trigger", "prompt": "set up a docs folder with tutorials and how-to guides for this repo" },
+    { "type": "should_trigger", "prompt": "our docs are a mess, restructure them so people can find things" },
+    { "type": "should_trigger", "prompt": "apply diataxis to our documentation" },
+    { "type": "should_trigger", "prompt": "can u write a getting started guide and usage docs for this lib" },
+    { "type": "should_trigger", "prompt": "draft a documentation plan for the v1 release" },
+    { "type": "should_trigger", "prompt": "docs r just one giant markdown file, split it up properly" },
+    { "type": "should_trigger", "prompt": "the tutorial keeps drifting into api reference material, clean that up" },
+    { "type": "should_trigger", "prompt": "what pages should a small OSS package's documentation actually have?" },
+    { "type": "should_trigger", "prompt": "write a how-to guide for configuring webhooks in our tool" },
+    { "type": "should_trigger", "prompt": "review our documentation and tell me what's missing" },
+    { "type": "should_trigger", "prompt": "we renamed half the config keys in v2, bring the docs up to date" },
+    { "type": "should_not_trigger", "prompt": "write a README for this project" },
+    { "type": "should_not_trigger", "prompt": "my readme is bloated, restructure it" },
+    { "type": "should_not_trigger", "prompt": "deploy our docs to github pages" },
+    { "type": "should_not_trigger", "prompt": "set up mkdocs with the material theme for this repo" },
+    { "type": "should_not_trigger", "prompt": "the docs site build is failing in CI" },
+    { "type": "should_not_trigger", "prompt": "write CONTRIBUTING.md and a code of conduct" },
+    { "type": "should_not_trigger", "prompt": "add docstrings to the functions in utils.py" },
+    { "type": "should_not_trigger", "prompt": "add topics and a social preview image so the repo gets found" },
+    { "type": "should_not_trigger", "prompt": "generate a changelog from the commit history" },
+    {
+      "type": "quality",
+      "prompt": "Our Python library has a 700-line README and no docs. Create a proper documentation set.",
+      "expected_behavior": [
+        "inventories existing content first and maps each chunk to tutorial / how-to / reference / explanation before writing anything new",
+        "proposes a minimal viable doc set (getting started, a few task how-tos, reference, 1-2 concept pages plus FAQ/troubleshooting) instead of a sprawling 20-page tree",
+        "moves README depth into docs/ pages and leaves the README as pitch + quickstart + links (or routes README rewriting to readme-author) rather than duplicating content in both places",
+        "keeps modes separate - the tutorial has no theory digressions, reference stays dry and factual",
+        "every command or code snippet is real and runnable in this repo, never invented"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Write a getting-started tutorial for our CLI tool",
+      "expected_behavior": [
+        "writes a learning-oriented, on-rails lesson: one happy path, concrete numbered steps, no configuration detours or design discussion",
+        "starts from a stated clean starting point (install + prerequisites) and ends with a visible, checkable success",
+        "uses second person, imperative, present tense, with short sentences",
+        "verifies the commands against the actual repo (or clearly marks anything unverifiable) instead of inventing flags"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "Apply diataxis to our docs but we only have capacity to maintain about 4 pages",
+      "expected_behavior": [
+        "scales the framework down instead of refusing or fabricating a large tree: roughly one quickstart tutorial, one how-to collection page, one reference page, one concepts page",
+        "explains what was deliberately dropped and what signal (user questions, issues) should trigger adding it back",
+        "does not mix modes within the 4 pages even though the set is small"
+      ]
+    },
+    {
+      "type": "quality",
+      "prompt": "We shipped v2 last week - renamed the config keys and removed the legacy sync command. Update the docs.",
+      "expected_behavior": [
+        "diffs or inspects the actual code changes first, then searches every docs page for the old identifiers rather than only editing the obvious page",
+        "updates or prunes each hit; deprecated-but-working features get marked with their replacement instead of silently deleted",
+        "preserves the existing docs structure and tone - a sync, not a rewrite",
+        "reports anything it could not verify against the code"
+      ]
+    }
+  ]
+}

@@ -8,6 +8,11 @@
       "skills": ["readme-author", "repo-discoverability"]
     },
     {
+      "title": "Document and deploy",
+      "description": "Docs users can actually learn from: Diátaxis-shaped content with runnable examples, published on GitHub Pages by a pipeline that keeps it correct.",
+      "skills": ["docs-author", "docs-site"]
+    },
+    {
       "title": "Welcome contributors",
       "description": "Community health files and structured intake that turn drive-by visitors into confident, low-friction contributors.",
       "skills": ["community-health", "issue-pr-templates"]

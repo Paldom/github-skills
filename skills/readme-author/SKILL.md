@@ -1,6 +1,6 @@
 ---
 name: readme-author
-description: Writes, restructures, or syncs a professional GitHub project README - front-loaded value prop, minimal badges, copy-pasteable quick start, scannable structure for a library, CLI, or web app. Use when the user asks to write, improve, restructure, or review a README, or calls it bloated, stale, or outdated. Not for repo topics/social-preview metadata, community files, or profile READMEs.
+description: Writes, restructures, or syncs a professional GitHub project README - front-loaded value prop, minimal badges, copy-pasteable quick start, scannable structure for a library, CLI, or web app. Use when the user asks to write, improve, restructure, or review a README, or calls it bloated, stale, or outdated. Not for repo topics/social-preview, community files, profile READMEs, or docs sites.
 license: MIT
 argument-hint: [path-to-README or project description]
 ---
@@ -19,7 +19,8 @@ exactly those failures.
 - CONTRIBUTING/SECURITY/SUPPORT and other community files → `community-health`.
 - Personal profile READMEs (`github.com/user/user`) → out of scope; keep those to a
   single screen and decline politely.
-- API reference documentation or docs sites → ordinary docs work, not this skill.
+- Documentation sets and docs sites (tutorials, guides, API reference) →
+  `docs-author` for the content, `docs-site` for the GitHub Pages pipeline.
 
 ## Workflow
 

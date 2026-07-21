@@ -45,7 +45,8 @@ protections), and produce unprioritized nag-lists that ignore project stage.
 4. **Report** (template in the checklist): per-category score table, overall grade,
    then the **top-5 prioritized fixes**, each with impact, effort, and the owning
    skill (`readme-author`, `repo-discoverability`, `community-health`,
-   `issue-pr-templates`, `repo-protections`).
+   `issue-pr-templates`, `repo-protections`; documentation-set or docs-site
+   gaps → `docs-author` / `docs-site`).
 5. **Going-public pre-flight** (when asked "before I make it public"): add the
    flip-specific blockers — license present (evidence-backed), PVR to enable right
    after the flip, social preview ready, **plus two MANUAL blockers the evidence
