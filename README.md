@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.svg" alt="github-skills icon" width="128"/>
+</p>
+
 # Github Skills
 
 [![CI](https://github.com/Paldom/github-skills/actions/workflows/ci.yml/badge.svg)](https://github.com/Paldom/github-skills/actions/workflows/ci.yml)
