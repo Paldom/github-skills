@@ -1,6 +1,6 @@
 ---
 name: docs-site
-description: Stands up, deploys, or fixes a documentation site on GitHub Pages - generator choice (MkDocs, Sphinx, Docusaurus, Starlight), the official Actions workflow, base-path/.nojekyll/custom-domain pitfalls, docs CI, versioning. Use for publishing docs to github.io or debugging a broken/unstyled Pages deploy. Not for writing the docs content, the README, or branch protections.
+description: Stands up, deploys, or fixes a documentation site on GitHub Pages - generator choice (MkDocs, Sphinx, Docusaurus, Starlight), an API reference built from docstrings via mkdocstrings or autodoc, the official Actions workflow, base-path/.nojekyll/custom-domain pitfalls, versioning. Use for publishing docs to github.io or debugging a broken/unstyled Pages deploy. Not for writing the docs content, the README, or branch protections.
 license: MIT
 argument-hint: [generator or deploy problem]
 ---

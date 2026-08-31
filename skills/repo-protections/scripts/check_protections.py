@@ -7,6 +7,7 @@ Prints PASS/WARN/FAIL/UNKNOWN per control; exit 1 if ANY FAIL is emitted
 UNKNOWN on 403/404 (plan limits, missing admin) - unknown is not failure.
 Needs `gh` auth. Stdlib only.
 """
+
 from __future__ import annotations
 
 import json
@@ -35,8 +36,11 @@ def gh_json(args: list[str]):
 
 def main() -> int:
     target = sys.argv[1] if len(sys.argv) > 1 else None
-    view_args = ["repo", "view"] + ([target] if target else []) + \
-        ["--json", "nameWithOwner,defaultBranchRef,isPrivate"]
+    view_args = (
+        ["repo", "view"]
+        + ([target] if target else [])
+        + ["--json", "nameWithOwner,defaultBranchRef,isPrivate"]
+    )
     info, err = gh_json(view_args)
     if info is None:
         print(f"FAIL: cannot read repo: {err}")
@@ -69,10 +73,14 @@ def main() -> int:
         if hits:
             protected = True
             for name, rules in hits:
-                print(f"PASS: active ruleset {name!r} covers {branch} (rules: {', '.join(sorted(rules))})")
-                for want, label in (("pull_request", "require PR"),
-                                    ("required_status_checks", "required status checks"),
-                                    ("non_fast_forward", "block force pushes")):
+                print(
+                    f"PASS: active ruleset {name!r} covers {branch} (rules: {', '.join(sorted(rules))})"
+                )
+                for want, label in (
+                    ("pull_request", "require PR"),
+                    ("required_status_checks", "required status checks"),
+                    ("non_fast_forward", "block force pushes"),
+                ):
                     if want not in rules:
                         print(f"WARN: ruleset {name!r} lacks {label}")
         else:
@@ -84,7 +92,9 @@ def main() -> int:
             print(f"PASS: classic branch protection on {branch} (consider migrating to a ruleset)")
         elif err and "404" not in err.lower() and "not protected" not in err.lower():
             unknowable += 1
-            print(f"UNKNOWN: classic protection not readable ({err.splitlines()[-1] if err else 'no access'})")
+            print(
+                f"UNKNOWN: classic protection not readable ({err.splitlines()[-1] if err else 'no access'})"
+            )
         else:
             fails += 1
             print(f"FAIL: {branch} has no ruleset and no classic protection")
@@ -94,13 +104,18 @@ def main() -> int:
     if not sec:
         print(f"UNKNOWN: security_and_analysis not readable ({err or 'hidden on this plan'})")
     else:
-        for key, label in (("secret_scanning", "secret scanning"),
-                           ("secret_scanning_push_protection", "push protection")):
+        for key, label in (
+            ("secret_scanning", "secret scanning"),
+            ("secret_scanning_push_protection", "push protection"),
+        ):
             status = (sec.get(key) or {}).get("status")
             if status == "enabled":
                 print(f"PASS: {label} enabled")
             elif status == "disabled":
-                print(f"WARN: {label} disabled" + (" (needs GHAS/Secret Protection on private repos)" if private else ""))
+                print(
+                    f"WARN: {label} disabled"
+                    + (" (needs GHAS/Secret Protection on private repos)" if private else "")
+                )
             else:
                 print(f"UNKNOWN: {label} status not visible")
 
@@ -109,8 +124,11 @@ def main() -> int:
         print("PASS: .github/dependabot.yml present (local)")
     else:
         proc = gh(["api", f"repos/{repo}/contents/.github/dependabot.yml", "--jq", ".path"])
-        print("PASS: .github/dependabot.yml present" if proc.returncode == 0
-              else "WARN: no dependabot.yml - version updates are not configured")
+        print(
+            "PASS: .github/dependabot.yml present"
+            if proc.returncode == 0
+            else "WARN: no dependabot.yml - version updates are not configured"
+        )
     proc = gh(["api", f"repos/{repo}/vulnerability-alerts"])
     if proc.returncode == 0:
         print("PASS: Dependabot alerts enabled")
@@ -123,7 +141,9 @@ def main() -> int:
     if private:
         print("NOTE: private repo - private vulnerability reporting applies after going public")
     else:
-        pvr, err = gh_json(["api", f"repos/{repo}/private-vulnerability-reporting", "--jq", ".enabled"])
+        pvr, err = gh_json(
+            ["api", f"repos/{repo}/private-vulnerability-reporting", "--jq", ".enabled"]
+        )
         if pvr is True:
             print("PASS: private vulnerability reporting enabled")
         elif pvr is False:
@@ -135,8 +155,10 @@ def main() -> int:
     if not protected and unknowable >= 2:
         # Both checks were unreadable (typically 403 plan limits on a private
         # repo) - the status is not determinable, which is not the same as missing.
-        print("UNKNOWN: protection status not determinable (plan limits or missing access) - "
-              "on private repos, rulesets/branch protection need a paid plan")
+        print(
+            "UNKNOWN: protection status not determinable (plan limits or missing access) - "
+            "on private repos, rulesets/branch protection need a paid plan"
+        )
     print(f"{'FAIL' if fails else 'OK'}: {fails} failing control(s)")
     return 1 if fails else 0
 

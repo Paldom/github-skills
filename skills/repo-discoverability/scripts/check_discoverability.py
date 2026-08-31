@@ -4,6 +4,7 @@
 Usage: check_discoverability.py [owner/repo]   (default: the repo for the cwd)
 Prints PASS/WARN/FAIL lines per lever; exit 1 if any FAIL. Needs `gh` auth. Stdlib only.
 """
+
 from __future__ import annotations
 
 import json
@@ -56,7 +57,9 @@ def main() -> int:
     if not topics:
         report("FAIL", "no topics - topics are browsable search surfaces (aim for 5-10)")
     elif len(topics) < 5:
-        report("WARN", f"only {len(topics)} topics ({', '.join(topics)}) - aim for 5-10 accurate ones")
+        report(
+            "WARN", f"only {len(topics)} topics ({', '.join(topics)}) - aim for 5-10 accurate ones"
+        )
     else:
         report("PASS", f"{len(topics)} topics: {', '.join(topics)}")
 
@@ -71,7 +74,16 @@ def main() -> int:
     custom = None
     if owner_proc.returncode == 0 and owner_proc.stdout.strip():
         q = f'query{{repository(owner:"{owner_proc.stdout.strip()}",name:"{name}"){{usesCustomOpenGraphImage}}}}'
-        p2 = gh(["api", "graphql", "-f", f"query={q}", "--jq", ".data.repository.usesCustomOpenGraphImage"])
+        p2 = gh(
+            [
+                "api",
+                "graphql",
+                "-f",
+                f"query={q}",
+                "--jq",
+                ".data.repository.usesCustomOpenGraphImage",
+            ]
+        )
         if p2.returncode == 0 and p2.stdout.strip() in ("true", "false"):
             custom = p2.stdout.strip() == "true"
     if custom is None:
@@ -79,8 +91,11 @@ def main() -> int:
     if custom:
         report("PASS", "custom social preview image set")
     else:
-        report("WARN", "default social preview - shared links render as bare name+avatar "
-                       "(Settings -> General -> Social preview, 1280x640)")
+        report(
+            "WARN",
+            "default social preview - shared links render as bare name+avatar "
+            "(Settings -> General -> Social preview, 1280x640)",
+        )
 
     # H1 alignment: only checkable when a local README exists (cwd repo).
     readme = Path("README.md")
@@ -88,14 +103,21 @@ def main() -> int:
         m = re.search(r"^#\s+(.+)$", readme.read_text(encoding="utf-8", errors="replace"), re.M)
         if not m:
             report("WARN", "local README has no H1 - repo name/H1 alignment not checkable")
-        elif norm(d.get("name", "")) in norm(m.group(1)) or norm(m.group(1)) in norm(d.get("name", "")):
+        elif norm(d.get("name", "")) in norm(m.group(1)) or norm(m.group(1)) in norm(
+            d.get("name", "")
+        ):
             report("PASS", f"README H1 ({m.group(1).strip()!r}) aligns with repo name")
         else:
-            report("WARN", f"README H1 ({m.group(1).strip()!r}) does not match repo name "
-                           f"({d.get('name')!r}) - align them or lead the description with the plain name")
+            report(
+                "WARN",
+                f"README H1 ({m.group(1).strip()!r}) does not match repo name "
+                f"({d.get('name')!r}) - align them or lead the description with the plain name",
+            )
 
     if d.get("isPrivate"):
-        print("NOTE: repo is private - invisible to search until public; metadata prepared now pays off at the flip")
+        print(
+            "NOTE: repo is private - invisible to search until public; metadata prepared now pays off at the flip"
+        )
 
     print(f"{'FAIL' if fails else 'OK'}: {fails} failing lever(s)")
     return 1 if fails else 0

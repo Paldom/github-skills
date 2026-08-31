@@ -20,6 +20,8 @@ Usage: python3 docs_lint.py [docs-dir]   (default: docs)
 
 from __future__ import annotations
 
+import contextlib
+import itertools
 import re
 import sys
 from pathlib import Path
@@ -31,9 +33,17 @@ BOLD_RE = re.compile(r"(\*\*[^*]+\*\*|__[^_]+__)")
 INLINE_CODE_RE = re.compile(r"`[^`]*`")
 FILENAME_RE = re.compile(r"^[a-z0-9][a-z0-9.-]*$")
 ROOT_NAV_NAMES = (
-    "mkdocs.yml", "mkdocs.yaml", "sidebars.js", "sidebars.ts",
-    "docusaurus.config.js", "docusaurus.config.ts", "astro.config.mjs",
-    "astro.config.ts", "conf.py", "_sidebar.md", "SUMMARY.md",
+    "mkdocs.yml",
+    "mkdocs.yaml",
+    "sidebars.js",
+    "sidebars.ts",
+    "docusaurus.config.js",
+    "docusaurus.config.ts",
+    "astro.config.mjs",
+    "astro.config.ts",
+    "conf.py",
+    "_sidebar.md",
+    "SUMMARY.md",
 )
 VITEPRESS_NAV_NAMES = ("config.ts", "config.mts", "config.js")
 
@@ -59,8 +69,12 @@ def strip_fences(text: str) -> list[str]:
             else:
                 out.append(line)
         else:
-            if m and m.group(1)[0] == fence[0] and len(m.group(1)) >= fence[1] \
-                    and not line.strip(fence[0] + " "):
+            if (
+                m
+                and m.group(1)[0] == fence[0]
+                and len(m.group(1)) >= fence[1]
+                and not line.strip(fence[0] + " ")
+            ):
                 fence = None
             out.append("")
     return out
@@ -91,15 +105,14 @@ def rel_link_targets(path: Path, lines: list[str]):
 def nav_config_text(root: Path) -> str:
     """Concatenated text of any generator nav/config near the docs tree."""
     candidates = [base / name for base in (root, root.parent) for name in ROOT_NAV_NAMES]
-    candidates += [base / ".vitepress" / name
-                   for base in (root, root.parent) for name in VITEPRESS_NAV_NAMES]
+    candidates += [
+        base / ".vitepress" / name for base in (root, root.parent) for name in VITEPRESS_NAV_NAMES
+    ]
     chunks = []
     for p in candidates:
         if p.is_file():
-            try:
+            with contextlib.suppress(OSError):
                 chunks.append(p.read_text(encoding="utf-8", errors="replace"))
-            except OSError:
-                pass
     return "\n".join(chunks)
 
 
@@ -109,7 +122,9 @@ def check_page(path: Path, root: Path) -> None:
     lines = strip_fences(text)
 
     if len(rel.parts) > 3:  # file more than 2 dirs below root
-        warnings.append(f"WARN  {rel}: nested {len(rel.parts) - 1} levels deep — keep the tree at most 2 levels")
+        warnings.append(
+            f"WARN  {rel}: nested {len(rel.parts) - 1} levels deep — keep the tree at most 2 levels"
+        )
     if not FILENAME_RE.match(path.name):
         warnings.append(f"WARN  {rel}: filename not lowercase-with-hyphens")
 
@@ -119,9 +134,11 @@ def check_page(path: Path, root: Path) -> None:
         warnings.append(f"WARN  {rel}: no H1 — every page needs exactly one title")
     elif h1s > 1:
         warnings.append(f"WARN  {rel}: {h1s} H1s — one concept, one page, one title")
-    for a, b in zip(levels, levels[1:]):
+    for a, b in itertools.pairwise(levels):
         if b > a + 1:
-            warnings.append(f"WARN  {rel}: heading level jumps h{a} -> h{b} — screen readers and outlines break")
+            warnings.append(
+                f"WARN  {rel}: heading level jumps h{a} -> h{b} — screen readers and outlines break"
+            )
             break
 
     prose = INLINE_CODE_RE.sub("", "\n".join(lines))
@@ -129,7 +146,9 @@ def check_page(path: Path, root: Path) -> None:
     if total > 400:
         bold = sum(len(m.group(0)) for m in BOLD_RE.finditer(prose))
         if bold / total > 0.10:
-            warnings.append(f"WARN  {rel}: ~{bold * 100 // total}% of the page is emphasized — past ~10% nothing stands out")
+            warnings.append(
+                f"WARN  {rel}: ~{bold * 100 // total}% of the page is emphasized — past ~10% nothing stands out"
+            )
 
     for target in rel_link_targets(path, lines):
         if not target.exists():
@@ -143,7 +162,9 @@ def check_page(path: Path, root: Path) -> None:
 def check_orphans(root: Path, files: list[Path]) -> None:
     index = next((root / n for n in ("index.md", "README.md") if (root / n).is_file()), None)
     if index is None:
-        errors.append(f"ERROR {root}: no index.md or README.md at the docs root — Pages needs an entry file")
+        errors.append(
+            f"ERROR {root}: no index.md or README.md at the docs root — Pages needs an entry file"
+        )
 
     linked: set[Path] = set()
     for f in files:
@@ -160,10 +181,14 @@ def check_orphans(root: Path, files: list[Path]) -> None:
         # extensionless id ('guides/setup', link: '/guides/setup'). A bare
         # substring match on the id would let "api" hide inside "api-docs".
         page_id = rel.with_suffix("").as_posix()
-        quoted = any(q in nav for q in (f"'{page_id}'", f'"{page_id}"', f"'/{page_id}'", f'"/{page_id}"'))
+        quoted = any(
+            q in nav for q in (f"'{page_id}'", f'"{page_id}"', f"'/{page_id}'", f'"/{page_id}"')
+        )
         if f.name in nav or rel.as_posix() in nav or quoted:
             continue
-        warnings.append(f"WARN  {rel}: orphan — not linked from any page or nav config; unreachable content rots")
+        warnings.append(
+            f"WARN  {rel}: orphan — not linked from any page or nav config; unreachable content rots"
+        )
 
 
 def main() -> int:
@@ -180,7 +205,9 @@ def main() -> int:
     check_orphans(root, files)
     for line in errors + warnings:
         print(line, file=sys.stderr)
-    print(f"{'FAIL' if errors else 'OK'}: {len(errors)} error(s), {len(warnings)} warning(s) across {len(files)} page(s)")
+    print(
+        f"{'FAIL' if errors else 'OK'}: {len(errors)} error(s), {len(warnings)} warning(s) across {len(files)} page(s)"
+    )
     return 1 if errors else 0
 
 

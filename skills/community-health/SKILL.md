@@ -1,6 +1,6 @@
 ---
 name: community-health
-description: Creates or completes GitHub community health files - CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, GOVERNANCE, FUNDING.yml, CODEOWNERS, LICENSE - tailored to the repo, not boilerplate. Use when the user asks for these files, contributing guidelines, a code of conduct, or to complete the community profile. Not for issue/PR templates or enabling security settings like scanning and rulesets.
+description: Creates or completes GitHub community health files - CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, GOVERNANCE, FUNDING.yml, CODEOWNERS, LICENSE - tailored to the repo, not boilerplate. Use when the user asks for these files, contributing guidelines, a code of conduct, whether to require a CLA or DCO, or to complete the community profile. Not for issue/PR templates or enabling security settings like scanning and rulesets.
 license: MIT
 argument-hint: [which files, or "all"]
 ---

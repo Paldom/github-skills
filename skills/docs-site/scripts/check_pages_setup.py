@@ -39,7 +39,9 @@ def git(root: Path, *args: str) -> str:
     try:
         out = subprocess.run(
             ["git", "-C", str(root), *args],
-            capture_output=True, text=True, timeout=15,
+            capture_output=True,
+            text=True,
+            timeout=15,
         )
         return out.stdout.strip() if out.returncode == 0 else ""
     except (OSError, subprocess.TimeoutExpired):
@@ -92,11 +94,17 @@ def check_workflow(p: Path) -> None:
                     "(default token permissions do not include Pages)"
                 )
     if deploys and "github-pages" not in text:
-        warnings.append(f"WARN  {rel}: no `github-pages` environment on the deploy job — expected by deploy-pages")
+        warnings.append(
+            f"WARN  {rel}: no `github-pages` environment on the deploy job — expected by deploy-pages"
+        )
     if deploys and re.search(r"^\s*pull_request\s*:", text, re.M):
-        warnings.append(f"WARN  {rel}: pull_request trigger in a workflow that deploys — deploy must run only from the default branch")
+        warnings.append(
+            f"WARN  {rel}: pull_request trigger in a workflow that deploys — deploy must run only from the default branch"
+        )
     if "upload-pages-artifact" in text and not STRICT_RE.search(text):
-        warnings.append(f"WARN  {rel}: no strict build flag found (mkdocs --strict / sphinx -W) — warnings rot silently without it")
+        warnings.append(
+            f"WARN  {rel}: no strict build flag found (mkdocs --strict / sphinx -W) — warnings rot silently without it"
+        )
 
 
 def check_base_path(root: Path, name: str) -> None:

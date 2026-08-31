@@ -1,6 +1,6 @@
 ---
 name: repo-audit
-description: Audits a GitHub repository against a professional open-source checklist - README quality, metadata, community files, intake templates, protections, activity - and returns a scored gap report with prioritized fixes. Use when the user asks to audit, health-check, or score their repo, or asks what's missing before going public. Not for fixing a single named file or code-level security audits.
+description: Audits a GitHub repository against a professional open-source checklist - README quality, metadata, community files, intake templates, protections, activity - and returns a scored gap report with prioritized fixes. Use when the user asks to audit, health-check or score their repo, whether the project is ready for outside contributors, or what is missing before going public. Not for fixing a single named file or code-level security audits.
 license: MIT
 argument-hint: [owner/repo (defaults to current repo)]
 ---

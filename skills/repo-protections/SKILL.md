@@ -1,6 +1,6 @@
 ---
 name: repo-protections
-description: Configures GitHub repository protections - rulesets (require PR, required checks, no force pushes), secret scanning and push protection, Dependabot, private vulnerability reporting, and Actions hardening. Use when the user asks to protect a branch, set up branch protection or rulesets, enable security features, or harden a repo. Not for writing SECURITY.md or fixing code vulnerabilities.
+description: Configures GitHub repository protections - rulesets (require PR, required checks, no force pushes), secret scanning and push protection, Dependabot, private vulnerability reporting, and Actions hardening. Use when the user asks to protect a branch, restrict who can merge to main, set up rulesets, enable security features, or harden a repo. Not for writing SECURITY.md or fixing code vulnerabilities.
 license: MIT
 argument-hint: [ruleset|scanning|dependabot|pvr|all]
 ---
